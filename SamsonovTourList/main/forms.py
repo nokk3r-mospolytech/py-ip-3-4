@@ -1,5 +1,14 @@
-from .models import Task
-from django.forms import ModelForm
+from .models import Region
+from django.forms import ModelForm, TextInput
 
 
-class
+class TaskForm(ModelForm):
+    class Meta:
+        model = Region
+        fields = ["regionName"]
+        widgets = {
+            "title": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите регион'
+            })
+        }

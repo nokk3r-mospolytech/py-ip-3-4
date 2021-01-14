@@ -3,8 +3,9 @@
 {% block title %} Создать путешествие {% endblock %}
 {% block content %}
 <form class="content" method="post">
-    <input type="text" placeholder="Введите название" class="form-control">
-    <textarea placeholder="Введите описание" class="form-control"></textarea>
+    <h2>Добавить регион</h2><br>
+    {% csrf_token %}
+    {{ form.regionName }}
     <button type="submit" class="btn btn-success">Добавить</button>
 </form>
 
