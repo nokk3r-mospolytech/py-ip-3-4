@@ -1,12 +1,21 @@
 {% extends 'main/base.html' %}
 {% block css %} <link rel="stylesheet" href="{{ STATIC_URL }}/css/index.css"> {% endblock %}
-{% block title %} {{title}} {% endblock %}
+{% block title %} Главная страница {% endblock %}
 {% block content %}
     {% for el in task %}
-        <div class="p-3 rounded content pl-15 d-flex flex-column align-items-center bg-light">
-            <h3>{{ el.title }}</h3>
-            <span>{{ el.descriptions }}</span><br>
-            <span>{{ el.price }}</span>
+        <div class="card mt-5 mb-5" style="width: 18rem;">
+            <div class="card-body bg-light">
+                <h5 class="card-title d-flex justify-content-center">{{el.title}}</h5>
+                <p class="card-text">
+                    <ul class="d-flex list-group list-group-flush">
+                        <li class="list-group-item">Комментарий: <br>{{el.descriptions}}</li>
+                        <li class="list-group-item">Сейчас активно: {{el.Avilable_id}}</li>
+                        <li class="list-group-item">Тип поездки: {{el.ChillVariations_id}}</li>
+                        <li class="list-group-item">Приоритет: {{el.Priority_id}}</li>
+                        <li class="list-group-item">Цена: {{el.Pricing_id}}.руб</li>
+                    </ul>
+                </p>
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

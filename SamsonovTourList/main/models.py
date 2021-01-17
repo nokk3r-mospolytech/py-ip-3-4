@@ -3,18 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class TaskDate(models.Model):
-    dateIn = models.DateField("Дата отправления")
-    dateOut = models.DateField("Дата заключения")
-
-    def __str__(self):
-        return str(self.dateIn)
-
-    class Meta:
-        verbose_name = 'Даты путешествия'
-        verbose_name_plural = 'Даты путешествия'
-
-
 class TaskTime(models.Model):
     timeIn = models.TimeField("Время отправления")
     timeOut = models.TimeField("Время заключения")
@@ -27,8 +15,34 @@ class TaskTime(models.Model):
         verbose_name_plural = 'Время путешествия'
 
 
+class TaskDate(models.Model):
+    dateIn = models.DateField("Дата отправления")
+    dateOut = models.DateField("Дата заключения")
+
+    TaskTime_id = models.ForeignKey(
+        TaskTime,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Время поездки'
+    )
+
+    def __str__(self):
+        return str(self.dateIn)
+
+    class Meta:
+        verbose_name = 'Даты путешествия'
+        verbose_name_plural = 'Даты путешествия'
+
+
 class Priority(models.Model):
     priority = models.CharField("Приоритет", max_length=20)
+
+    TaskDate_id = models.ForeignKey(
+        TaskDate,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Дата поездки'
+    )
 
     def __str__(self):
         return self.priority
@@ -51,6 +65,13 @@ class Pricing(models.Model):
 
 class ChillVariations(models.Model):
     name = models.CharField("Название", max_length=30)
+
+    Pricing_id = models.ForeignKey(
+        Pricing,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Возможная цена'
+    )
 
     def __str__(self):
         return self.name
@@ -82,23 +103,19 @@ class Guide(models.Model):
         verbose_name='Регион'
     )
 
+    TaskDate_id = models.ForeignKey(
+        TaskDate,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Дата поездки'
+    )
+
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Имя гида'
         verbose_name_plural = 'Имя гида'
-
-
-class RatingPlace(models.Model):
-    rating_index = models.IntegerField()
-
-    def __str__(self):
-        return str(self.rating_index)
-
-    class Meta:
-        verbose_name = 'Рейтинг места'
-        verbose_name_plural = 'Рейтинг места'
 
 
 class Avilable(models.Model):
@@ -148,7 +165,7 @@ class Task(models.Model):
         Avilable,
         on_delete=models.CASCADE,
         null=True,
-        verbose_name='ID поездки'
+        verbose_name='Активна ли поездка'
     )
     Priority_id = models.ForeignKey(
         Priority,
@@ -164,3 +181,20 @@ class Task(models.Model):
         verbose_name = 'Список туров'
         verbose_name_plural = 'Список туров'
 
+
+class RatingPlace(models.Model):
+    rating_index = models.IntegerField()
+
+    Task_id = models.ForeignKey(
+        Task,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name='Название тура'
+    )
+
+    def __str__(self):
+        return str(self.rating_index)
+
+    class Meta:
+        verbose_name = 'Рейтинг места'
+        verbose_name_plural = 'Рейтинг места'

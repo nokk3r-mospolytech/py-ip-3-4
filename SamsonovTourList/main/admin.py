@@ -3,17 +3,41 @@ from .models import *
 
 # Register your models here.
 
+
+def isAvilableFalse(modeladmin, request, queryset):
+    queryset.update(isAvilable='Нет')
+
+def isAvilableTrue(modeladmin, request, queryset):
+    queryset.update(isAvilable='Да')
+
+
+isAvilableFalse.short_description = "Сделать выделенным Нет"
+isAvilableTrue.short_description = "Сделать выделенным Да"
 admin.site.register(ChillVariations)
-admin.site.register(Guide)
 admin.site.register(Pricing)
-admin.site.register(Priority)
-admin.site.register(RatingPlace)
 admin.site.register(Region)
+
+
+@admin.register(Guide)
+class GuideAdmin(admin.ModelAdmin):
+    list_filter = ('rating', 'Region_id')
+    list_display = ('name', 'rating', 'Region_id')
+
+
+@admin.register(Priority)
+class PriorityAdmin(admin.ModelAdmin):
+    list_display = ('priority', 'TaskDate_id')
+
+
+@admin.register(RatingPlace)
+class RatingPlaceAdmin(admin.ModelAdmin):
+    list_display = ('rating_index', 'Task_id')
 
 
 @admin.register(Avilable)
 class AvilableAdmin(admin.ModelAdmin):
     list_display = ('isAvilable', 'Region_id')
+    actions = [isAvilableFalse, isAvilableTrue]
 
 
 @admin.register(Task)
@@ -24,7 +48,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 @admin.register(TaskDate)
 class TaskDateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'dateIn', 'dateOut')
+    list_display = ('id', 'dateIn', 'dateOut', 'TaskTime_id')
 
 
 @admin.register(TaskTime)
