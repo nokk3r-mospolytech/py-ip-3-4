@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,700;1,500&display=swap');
+
+$color: #0669b2;
+$black: #272822;
+$yellow: #FFD866;
+$pink: #F92672;
+
+html{
+  display: flex;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+}
+
+app-root{
+  overflow: hidden;
+}
+
+body{
+  height: calc(var(--vh, 1vh) * 100);
+  min-width: 100%;
+}
+
+body, span, a{
+  font-family: 'Barlow', 'Roboto', sans-serif;
+}
+
+yellow{
+  color: $yellow;
+}
+
+pink{
+  color: $pink;
+}
+
+html, body, div, h1, h2, h3, h4, h5{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+div, header{
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+a{
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition: 0.3s;
+}
+
+img{
+  width: 500px;
+}
+
+input[type=text] {
+  border: none;
+  border-radius: 7px;
+  padding: 5px 10px;
+  outline: none;
+
+  &:focus{
+    border: 1px solid black;
+  }
+}
+
+.pointer{
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover{
+    transform: scale(1);
+  }
+}
+
+app-root{
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}

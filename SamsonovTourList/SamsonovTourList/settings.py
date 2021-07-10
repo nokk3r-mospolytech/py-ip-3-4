@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,12 @@ SECRET_KEY = 'ch%iu4vgp48&l$q7_1)8w=0kvm_+79*d0s4enh3y1%@8b*tjh&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'samsonovtourlist1.std-936.ist.mospolytech.ru',
+    'samsonovtourlist.std-936.ist.mospolytech.ru',
+    'localhost',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -37,8 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'SamsonovTourList',
     'main',
     'import_export',
+    'rest_framework',
+    'graphene_django',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -46,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -69,16 +79,52 @@ TEMPLATES = [
     },
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 WSGI_APPLICATION = 'SamsonovTourList.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite34',
+#         'default-character-set': 'utf8'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite34',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'std_936_samsonov_tour_list',
+        'USER': 'std_936_samsonov_tour_list',
+        'PASSWORD': '123123123',
+        'HOST': 'std-mysql.ist.mospolytech.ru',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'default-character-set': 'utf8'
     }
 }
 
@@ -101,6 +147,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# GRAPHENE = {
+#     'SCHEMA': 'SamsonovTourList.schema.schema',
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -115,6 +164,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

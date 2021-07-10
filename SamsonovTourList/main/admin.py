@@ -17,6 +17,7 @@ admin.site.register(ChillVariations)
 admin.site.register(Pricing)
 admin.site.register(Region)
 
+admin.site.site_url = "http://frontsamtourlist.std-936.ist.mospolytech.ru/"
 
 @admin.register(Guide)
 class GuideAdmin(admin.ModelAdmin):

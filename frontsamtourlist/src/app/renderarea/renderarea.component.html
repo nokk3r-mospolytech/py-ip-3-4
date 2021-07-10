@@ -1,0 +1,64 @@
+<header>
+  <div class="ul ul-header">
+    <div (click)="isClicked(this.url, 'start');"  class="logo">
+      <div class="logo__text"><yellow>S</yellow>amsonov<yellow>T</yellow>our<yellow>L</yellow>ist</div>
+      <span class="text"><yellow>Планируй</yellow> путешествия с нами!</span>
+    </div>
+    <a class="li pointer" href="http://samsonovtourlist.std-936.ist.mospolytech.ru/admin"><div>вход</div></a>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  </div>
+</header>
+<div class="main">
+  <div *ngIf="this.isActive == 'start'" class="ul ul-start">
+    <div class="ul ul-info">
+      <div class="li">
+      <span class="text animate__animated animate__slideInLeft">Мечтаешь о путешествиях?<br>
+        Незнаешь куда поехать?<br>
+        У нас есть выбор!</span>
+      </div>
+      <div class="li">
+        <span class="random animate__animated animate__slideInRight">{{this.ranTitle}}</span>
+      </div>
+    </div>
+    <div class="ul ul-button">
+      <div (click)="isClicked(this.url, 'main', 'list');" class="li">
+        <h4 class="animate__animated animate__zoomIn"><yellow>Посмотреть</yellow> все туры!</h4>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.isActive == 'main'" class="ul ul-main">
+    <div class="setting">
+      <div class="block">
+        <span>Фильтр: </span>
+        <a (click)="mainChange()"><span>{{this.mainIsDisable[1]}}</span></a>
+      </div>
+      <input [formControl]="searchControl" placeholder="Поиск" />
+    </div>
+    <div class="li li--content">
+      <div *ngFor="let check of this.request" class="li">
+        <div *ngIf="(this.mainIsDisable[0] || check.Avilable_id == 'Да') && (check.title.toLowerCase().indexOf(this.search) != -1 || this.search == '')" class="folder animate__animated animate__faster animate__zoomIn">
+          <a (click)="isClicked(this.url + '/1', 'detail', '1')"><h3>{{check.title}}</h3></a>
+          <span>Тип поездки: {{check.ChillVariations_id}}</span>
+          <span>Цена: {{check.Pricing_id}} руб.</span>
+          <span>Сейчас активно: {{check.Avilable_id}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.isActive == 'detail'" class="ul ul-main animate__animated animate__zoomIn">
+    <h3>Детальная информация</h3>
+    <div class="li li--content">
+      <div *ngFor="let check of this.request" class="li">
+        <div class="folder">
+          <h3>{{check.title}}</h3>
+          <span>Тип поездки: {{this.request[0].id}}</span>
+          <span>Приоритет: {{check.Priority_id}}</span>
+          <span>Цена: {{check.Pricing_id}}</span>
+          <span>Сейчас активно: {{check.Avilable_id}}</span>
+          <span>Комментарий: {{check.descriptions}}</span>
+        </div>
+      </div>
+    </div>
+    <a (click)="isClicked(this.url, 'main')"><h3>Вернуться обратно</h3></a>
+  </div>
+</div>
