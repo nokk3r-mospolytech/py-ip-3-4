@@ -1,6 +1,7 @@
 $color: #0669b2;
 $black: #272822;
 $yellow: #FFD866;
+$pink: #F92672;
 //$black: #;
 //$black: #;
 
@@ -34,7 +35,7 @@ header{
     letter-spacing: 0.5px;
     align-items: center;
 
-    >*{
+    .up-f{
       transform: scale(0.8);
       transition: 0.2s;
 
@@ -47,16 +48,8 @@ header{
       align-items: center;
       cursor: pointer;
 
-      &:hover{
-        span{
-          transform: scale(1);
-        }
-      }
-
-      span{
+      .dashboard{
         font-size: 18px;
-        transform: scale(0);
-        transition: 0.4s;
         margin-left: 15px;
         text-align: center;
       }
@@ -256,6 +249,103 @@ h2, h3, h4{
   }
 }
 
+.ul-dashboard{
+  flex-direction: column;
+
+  .ul--info{
+    flex-direction: row;
+    align-items: flex-start;
+
+    .li{
+      margin: 10px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      border: 2px solid $black;
+
+      span{
+        font-size: 24px;
+        text-align: center;
+
+        &:first-of-type{
+          margin: 15px 0;
+        }
+      }
+    }
+  }
+
+  .ul-graphics{
+    width: 100%;
+    margin: 50px 0;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    .li--gist{
+      .dist--info{
+        align-self: flex-start;
+        font-size: 16px;
+        margin-top: 15px;
+      }
+
+      .gist--main{
+        align-items: flex-end;
+
+        .bar--set{
+          flex-direction: column;
+          margin-top: 25px;
+
+          .bar{
+            margin: 0 10px;
+            width: 20px;
+            background: $yellow;
+          }
+
+          span{
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .li--diag{
+      .donut-segment-1{
+        stroke: $yellow;
+      }
+      .donut-segment-2{
+        stroke: $pink;
+      }
+      .donut-segment-3{
+        stroke: $black;
+      }
+
+      .ul--diag--info{
+        .li{
+          margin: 0 10px;
+        }
+
+        .sq{
+          width: 15px;
+          height: 15px;
+        }
+
+        .sq--yellow{
+          background: $yellow;
+        }
+
+        .sq--black{
+          background: $black;
+        }
+        .sq--pink{
+          background: $pink;
+        }
+
+        span{
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
 .ul-con{
   display: flex;
   flex-direction: column;
@@ -314,9 +404,13 @@ h2, h3, h4{
   header{
     padding: 20px;
 
-    .logo{
-      .text{
-        display: none;
+    .ul{
+      .logo{
+        flex-direction: column;
+        .dashboard{
+          margin: 20px 0 0 0;
+          transform: scale(1);
+        }
       }
     }
   }
@@ -373,6 +467,23 @@ h2, h3, h4{
 
     .folder{
       width: 90%;
+    }
+  }
+
+  .ul-dashboard{
+    .ul--info{
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .ul-graphics{
+      margin-top: 30px;
+      flex-direction: column;
+      align-items: center;
+
+      .li--diag{
+        margin-top: 30px;
+      }
     }
   }
 }

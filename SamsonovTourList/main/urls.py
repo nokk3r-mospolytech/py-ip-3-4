@@ -14,7 +14,7 @@ urlpatterns = [
     path('api/v1/task', views.TaskCreateView.as_view()),
     path('api/v1/task/list', views.TaskListView.as_view()),
     path('api/v1/task/list/<int:pk>', views.TaskDetailView.as_view()),
-    path('api/v1/region', views.CreateView.as_view()),
-    path('api/v1/region/list', views.ListView.as_view()),
+    path('api/v1/region/list', views.RegionListView.as_view()),
+    path('api/v1/guide/list', views.GuideListView.as_view()),
     # path('api/v1/region/list/<int:pk>', views.ListView.as_view()),
 ]

@@ -6,12 +6,17 @@ from .forms import TaskForm
 from . import serializers
 
 
-class CreateView(generics.CreateAPIView):
+class RegionCreateView(generics.CreateAPIView):
     serializer_class = serializers.CartDetailSerializers
 
 
-class ListView(generics.ListAPIView):
+class RegionListView(generics.ListAPIView):
     serializer_class = serializers.CartListSerializers
+    queryset = Region.objects.all()
+
+
+class RegionChangeView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.CartChangedSerializers
     queryset = Region.objects.all()
 
 
@@ -32,9 +37,9 @@ class TaskCreateView(generics.CreateAPIView):
     serializer_class = serializers.TaskListSerializers
 
 
-class ChangeView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.CartChangedSerializers
-    queryset = Region.objects.all()
+class GuideListView(generics.ListAPIView):
+    serializer_class = serializers.GuideListSerializers
+    queryset = Guide.objects.all()
 
 
 # Create your views here.

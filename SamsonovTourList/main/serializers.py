@@ -20,6 +20,16 @@ class TaskListSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class GuideListSerializers(serializers.ModelSerializer):
+    ChillVariations_id = serializers.StringRelatedField()
+    Region_id = serializers.StringRelatedField()
+    TaskDate_id = serializers.StringRelatedField()
+
+    class Meta:
+        model = models.Guide
+        fields = '__all__'
+
+
 class TaskDetailSerializers(serializers.ModelSerializer):
     ChillVariations_id = serializers.StringRelatedField()
     Avilable_id = serializers.StringRelatedField()
