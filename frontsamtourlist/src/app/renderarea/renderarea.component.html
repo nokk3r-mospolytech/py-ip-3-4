@@ -49,15 +49,15 @@
     <div class="ul ul--info">
       <div class="li">
         <span>Кол-во туров</span>
-        <span><pink>{{this.request.length}}3</pink></span>
+        <span><pink>{{this.request.length}}</pink></span>
       </div>
       <div class="li">
-        <span>Кол-во активнвых туров</span>
-        <span>{{infoForDashboard(1)}}7</span>
+        <span>Кол-во активных туров</span>
+        <span><pink>{{infoForDashboard(1)}}</pink></span>
       </div>
       <div class="li">
         <span>Кол-во гидов</span>
-        <span><pink>{{this.guideRequest.length}}4</pink></span>
+        <span><pink>{{this.guideRequest.length}}</pink></span>
       </div>
       <div class="li">
         <span>Общая стоимость туров</span>
@@ -110,7 +110,7 @@
       <div *ngFor="let check of this.request" class="li">
         <div class="folder">
           <h3>{{check.title}}</h3>
-          <span>Тип поездки: {{this.request[0].id}}</span>
+          <span>Тип поездки: {{check.ChillVariations_id}}</span>
           <span>Приоритет: {{check.Priority_id}}</span>
           <span>Цена: {{check.Pricing_id}}</span>
           <span>Сейчас активно: {{check.Avilable_id}}</span>
